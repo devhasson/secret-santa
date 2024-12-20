@@ -5,8 +5,8 @@ import { z } from "zod";
 
 const formSchema = z.object({
   email: z
-    .string({ message: "E-mail is required." })
-    .email({ message: "Invalid e-mail address." }),
+    .string({ message: "E-mail is required" })
+    .email({ message: "Invalid e-mail address" }),
 });
 
 type State = {
@@ -25,8 +25,7 @@ export async function sendMagicLink(_prevState: State, formData: FormData) {
   if (!validatedData.success) {
     return {
       errors: validatedData.error.flatten().fieldErrors,
-      message: "Please, fill in the fields correctly.",
-      success: false,
+      message: "Please, fill in the fields correctly",
     };
   }
 
@@ -35,12 +34,12 @@ export async function sendMagicLink(_prevState: State, formData: FormData) {
 
     return {
       success: true,
-      message: "We sent a magic link to your inbox. Check your e-mail.",
+      message: "🎉 We sent a magic link to your inbox. Check your e-mail",
     };
   } catch {
     return {
       success: false,
-      message: "An error occurred. Please, try again.",
+      message: "An error occurred. Please, try again",
     };
   }
 }
