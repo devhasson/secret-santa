@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { Header } from "@/components/header";
 import { redirect } from "next/navigation";
 
 export default async function RootLayout({
@@ -12,5 +13,10 @@ export default async function RootLayout({
     redirect("/auth/sign-in");
   }
 
-  return <>{children}</>;
+  return (
+    <div className="flex flex-col gap-16">
+      <Header />
+      {children}
+    </div>
+  );
 }
