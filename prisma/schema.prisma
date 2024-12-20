@@ -18,6 +18,10 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  participant_on Participant[]
+  groups_owns    Group[]
+  invited_for    Invite[]
 }
 
 model Account {
@@ -57,4 +61,71 @@ model VerificationToken {
   expires    DateTime
 
   @@id([identifier, token])
+}
+
+enum ParticipantRole {
+  ADMIN
+  OWNER
+  MEMBER
+}
+
+model Participant {
+  id        String          @id @default(cuid())
+  createdAt DateTime        @default(now())
+  role      ParticipantRole @default(MEMBER)
+
+  chosenId String?      @unique
+  chosen   Participant? @relation("ParticipantRelation", fields: [chosenId], references: [id])
+
+  chosenBy Participant? @relation("ParticipantRelation")
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  groupId String
+  group   Group  @relation(fields: [groupId], references: [id])
+
+  @@unique([userId, groupId])
+  @@index([userId, groupId])
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+model Invite {
+  id     String       @id @default(cuid())
+  status InviteStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  groupId String
+  group   Group  @relation(fields: [groupId], references: [id])
+}
+
+enum GroupStatus {
+  WAITING
+  STARTED
+  FINISHED
+}
+
+model Group {
+  id     String      @id @default(cuid())
+  name   String
+  bio    String?
+  status GroupStatus @default(WAITING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  participants Participant[]
+  invites      Invite[]
 }
