@@ -12,7 +12,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     session: async ({ session, token }) => {
-      if (session?.user) {
+      if (session?.user && token?.sub) {
         session.user.id = token.sub;
       }
 
