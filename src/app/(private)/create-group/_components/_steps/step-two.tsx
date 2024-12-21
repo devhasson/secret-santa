@@ -113,17 +113,13 @@ export function StepTwo() {
       )}
 
       <div className="flex flex-col gap-2">
-        <Label
-          htmlFor="participant_email"
-          className={`${errors.participantEmail ? "text-red-700" : ""}`}
-        >
-          E-mail
-        </Label>
+        <Label htmlFor="participant_email">E-mail</Label>
         <div className="flex items-center gap-2">
           <Input
             value={participantEmail || ""}
             onChange={(e) => setParticipantEmail(e.target.value)}
             name="participant_email"
+            className={`${errors.participantEmail ? "border-red-700 " : ""}`}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();

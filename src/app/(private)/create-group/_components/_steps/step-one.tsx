@@ -75,16 +75,12 @@ export function StepOne() {
   return (
     <div className={`${step === 1 ? "flex" : "hidden"} flex-col gap-6`}>
       <div className="flex flex-col gap-2">
-        <Label
-          htmlFor="group_name"
-          className={`${errors.groupName ? "text-red-700" : ""}`}
-        >
-          Group Name
-        </Label>
+        <Label htmlFor="group_name">Group Name</Label>
         <Input
           name="group_name"
           value={groupName || ""}
           onChange={(e) => setGroupName(e.target.value)}
+          className={`${errors.groupName ? "border-red-700 " : ""}`}
           placeholder="Type the name of the santa group"
         />
         {errors?.groupName &&
@@ -95,16 +91,12 @@ export function StepOne() {
           ))}
       </div>
       <div className="flex flex-col gap-2">
-        <Label
-          htmlFor="group_description"
-          className={`${errors.groupDescription ? "text-red-700" : ""}`}
-        >
-          Description
-        </Label>
+        <Label htmlFor="group_description">Description</Label>
         <Textarea
           name="group_description"
           value={groupDescription || ""}
           onChange={(e) => setGroupDescription(e.target.value)}
+          className={`${errors.groupDescription ? "border-red-700" : ""}`}
           placeholder="Enter a description for the group"
         />
         {errors?.groupDescription &&
