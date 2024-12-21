@@ -118,6 +118,7 @@ model Group {
   id     String      @id @default(cuid())
   name   String
   bio    String?
+  date   DateTime?
   status GroupStatus @default(WAITING)
 
   createdAt DateTime @default(now())
