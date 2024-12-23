@@ -1,16 +1,17 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useState } from "react";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-
-import { useCreateGroupStepStore } from "../../_providers/create-group-steps-provider";
-import { useQueryState } from "nuqs";
 import { toast } from "sonner";
 import { z } from "zod";
+
+import { stepVariants } from "@/utils/step-variants";
+import { useQueryState } from "nuqs";
+import { useCreateGroupStepStore } from "../../_providers/create-group-steps-provider";
 
 const stepOneSchema = z.object({
   groupName: z.string({ message: "Group name is required" }).nonempty(),
@@ -23,10 +24,9 @@ interface ErrorState {
 }
 
 export function StepOne() {
-  const { step, incrementStep } = useCreateGroupStepStore((state) => state);
+  const { incrementStep } = useCreateGroupStepStore((state) => state);
 
   const [errors, setErrors] = useState<ErrorState>({});
-
   const [groupName, setGroupName] = useQueryState("group_name");
   const [groupDescription, setGroupDescription] =
     useQueryState("group_description");
@@ -64,7 +64,6 @@ export function StepOne() {
       if (errors) {
         setErrors(errors);
       }
-
       return toast.error(message);
     }
 
@@ -73,7 +72,13 @@ export function StepOne() {
   }
 
   return (
-    <div className={`${step === 1 ? "flex" : "hidden"} flex-col gap-6`}>
+    <motion.div
+      variants={stepVariants}
+      initial="hidden"
+      animate="enter"
+      exit="exit"
+      className="flex flex-col gap-6"
+    >
       <div className="flex flex-col gap-2">
         <Label htmlFor="group_name">Group Name</Label>
         <Input
@@ -90,6 +95,7 @@ export function StepOne() {
             </p>
           ))}
       </div>
+
       <div className="flex flex-col gap-2">
         <Label htmlFor="group_description">Description</Label>
         <Textarea
@@ -116,6 +122,6 @@ export function StepOne() {
           Continue
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }

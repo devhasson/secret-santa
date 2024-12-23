@@ -1,15 +1,19 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-import { useCreateGroupStepStore } from "../../_providers/create-group-steps-provider";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { useState } from "react";
+import { Plus, X } from "lucide-react";
 
 import { z } from "zod";
-import { Plus, X } from "lucide-react";
 import { useQueryState } from "nuqs";
-import { Badge } from "@/components/ui/badge";
+
+import { stepVariants } from "@/utils/step-variants";
+import { useCreateGroupStepStore } from "../../_providers/create-group-steps-provider";
 
 const stepTwoSchema = z.object({
   participantEmail: z
@@ -22,39 +26,13 @@ interface ErrorState {
 }
 
 export function StepTwo() {
-  const { step, incrementStep, decrementStep } = useCreateGroupStepStore(
+  const { incrementStep, decrementStep, step } = useCreateGroupStepStore(
     (state) => state
   );
 
   const [errors, setErrors] = useState<ErrorState>({});
   const [participantEmail, setParticipantEmail] = useQueryState("");
   const [participants, setParticipants] = useState<string[]>([]);
-
-  function addParticipant() {
-    const { success, errors, message } = validateSchema();
-
-    if (!success) {
-      if (errors) {
-        setErrors(errors);
-      }
-
-      return toast.error(message);
-    }
-
-    setParticipants((participants) => [
-      ...participants,
-      participantEmail || "",
-    ]);
-
-    setErrors({});
-    setParticipantEmail("");
-  }
-
-  function removeParticipant(participant: string) {
-    setParticipants((participants) =>
-      participants.filter((p) => p !== participant)
-    );
-  }
 
   function validateSchema() {
     try {
@@ -79,6 +57,25 @@ export function StepTwo() {
     return { success: true };
   }
 
+  function addParticipant() {
+    const { success, errors, message } = validateSchema();
+
+    if (!success) {
+      if (errors) {
+        setErrors(errors);
+      }
+      return toast.error(message);
+    }
+
+    setParticipants((prev) => [...prev, participantEmail || ""]);
+    setParticipantEmail("");
+    setErrors({});
+  }
+
+  function removeParticipant(participant: string) {
+    setParticipants((prev) => prev.filter((p) => p !== participant));
+  }
+
   function handleContinue(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
@@ -89,10 +86,18 @@ export function StepTwo() {
     if (participants.length === 0) {
       return toast.error("You have to add at least one participant");
     }
+
+    incrementStep();
   }
 
   return (
-    <div className={`${step === 2 ? "flex" : "hidden"} flex-col gap-6`}>
+    <motion.div
+      variants={stepVariants}
+      initial="hidden"
+      animate="enter"
+      exit="exit"
+      className="flex flex-col gap-6"
+    >
       {participants.length > 0 && (
         <div className="flex gap-2 flex-wrap">
           {participants.map((participant) => (
@@ -157,6 +162,6 @@ export function StepTwo() {
           Finish
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }
