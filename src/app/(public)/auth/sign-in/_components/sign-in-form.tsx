@@ -28,7 +28,7 @@ export function SignInForm() {
       toast.error(state.message);
       state.message = "";
     }
-  }, [state.success, state.message]);
+  }, [state]);
 
   return (
     <form action={dispatch} className="space-y-8 w-96 m-auto">
@@ -67,8 +67,8 @@ export function SignInForm() {
         {state.success
           ? "Link sent - check your inbox"
           : pending
-          ? "Sending link"
-          : "Continue with e-mail"}
+            ? "Sending link"
+            : "Continue with e-mail"}
       </Button>
     </form>
   );
