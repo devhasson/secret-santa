@@ -13,6 +13,7 @@ import { z } from "zod";
 import { useQueryState } from "nuqs";
 
 import { stepVariants } from "@/utils/step-variants";
+import { participantVariants } from "@/utils/participant-variants";
 import { useCreateGroupStepStore } from "../../_providers/create-group-steps-provider";
 
 const stepTwoSchema = z.object({
@@ -101,8 +102,12 @@ export function StepTwo() {
       {participants.length > 0 && (
         <div className="flex gap-2 flex-wrap">
           {participants.map((participant) => (
-            <button
+            <motion.button
               key={participant}
+              variants={participantVariants}
+              initial="hidden"
+              animate="visible"
+              exit="removed"
               onClick={() => removeParticipant(participant)}
               className="flex items-center gap-2"
             >
@@ -112,7 +117,7 @@ export function StepTwo() {
                 </span>
                 <X size={12} />
               </Badge>
-            </button>
+            </motion.button>
           ))}
         </div>
       )}
