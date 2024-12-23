@@ -33,6 +33,10 @@ export function StepTwo() {
   function addParticipant() {
     const { success, errors, message } = validateSchema();
 
+    if (participants.includes(participantEmail || "")) {
+      return toast.error("This participant is already added");
+    }
+
     if (!success) {
       if (errors) {
         setErrors(errors);
