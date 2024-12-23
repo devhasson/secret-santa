@@ -64,7 +64,11 @@ export function AddParticipants() {
             }
           }}
         />
-        <Button type="button" onClick={() => handleAddParticipant(newEmail)}>
+        <Button
+          variant="ghost"
+          type="button"
+          onClick={() => handleAddParticipant(newEmail)}
+        >
           <Plus />
         </Button>
       </div>
