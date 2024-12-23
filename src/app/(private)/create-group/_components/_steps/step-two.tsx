@@ -12,7 +12,6 @@ import { useQueryState } from "nuqs";
 <<<<<<< HEAD
 
 import { stepVariants } from "@/utils/step-variants";
-import { participantVariants } from "@/utils/participant-variants";
 import { useCreateGroupStepStore } from "../../_providers/create-group-steps-provider";
 =======
 import { Badge } from "@/components/ui/badge";
@@ -103,12 +102,8 @@ export function StepTwo() {
       {participants.length > 0 && (
         <div className="flex gap-2 flex-wrap">
           {participants.map((participant) => (
-            <motion.button
+            <button
               key={participant}
-              variants={participantVariants}
-              initial="hidden"
-              animate="visible"
-              exit="removed"
               onClick={() => removeParticipant(participant)}
               className="flex items-center gap-2"
             >
@@ -118,7 +113,7 @@ export function StepTwo() {
                 </span>
                 <X size={12} />
               </Badge>
-            </motion.button>
+            </button>
           ))}
         </div>
       )}
