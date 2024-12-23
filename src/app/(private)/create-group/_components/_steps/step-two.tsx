@@ -9,13 +9,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { Plus, X } from "lucide-react";
 import { useQueryState } from "nuqs";
-<<<<<<< HEAD
-
-import { stepVariants } from "@/utils/step-variants";
-import { useCreateGroupStepStore } from "../../_providers/create-group-steps-provider";
-=======
 import { Badge } from "@/components/ui/badge";
->>>>>>> parent of 8ea0040 (feat: integrate framer-motion for animated transitions in group creation steps)
 
 const stepTwoSchema = z.object({
   participantEmail: z
