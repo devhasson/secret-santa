@@ -1,6 +1,8 @@
 import { auth } from "@/auth";
+import { Separator } from "@/components/ui/separator";
 import { fetchGroupsByUser } from "@/data/fetch-groups-by-user-id";
 import { unauthorized } from "next/navigation";
+import { GroupCard } from "./_components/group-card";
 
 export default async function Page() {
   const session = await auth();
@@ -24,14 +26,14 @@ export default async function Page() {
   }
 
   return (
-    <div className="fllex flex-col mx-auto px-4 max-w-screen-lg w-full">
-      <h1 className="font-bold text-3xl">My Santas</h1>
-      {groups.map((group) => (
-        <div key={group.id} className="border p-4 my-4 rounded-md">
-          <h2 className="font-bold text-xl capitalize">{group.name}</h2>
-          <p className="text-muted-foreground text-sm">{group.bio}</p>
-        </div>
-      ))}
+    <div className="flex flex-col mx-auto px-4 gap-8 max-w-screen-lg w-full">
+      <h1 className="font-bold text-8xl">My Santas</h1>
+      <Separator />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {groups.map((group) => (
+          <GroupCard key={group.id} group={group} />
+        ))}
+      </div>
     </div>
   );
 }

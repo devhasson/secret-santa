@@ -13,7 +13,7 @@ const createGroupSchema = z.object({
     .max(40, { message: "Group name must have a maximum of 40 characters." }),
   groupBio: z
     .string()
-    .max(60, { message: "Group bio must have a maximum of 60 characters." })
+    .max(600, { message: "Group bio must have a maximum of 600 characters." })
     .optional()
     .nullable(),
   groupDate: z.string().optional().nullable(),

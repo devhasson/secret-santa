@@ -82,9 +82,9 @@ export function CreateGroupForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="group_description">Description</Label>
+          <Label htmlFor="group_bio">Description</Label>
           <Textarea
-            name="group_description"
+            name="group_bio"
             value={groupBio || ""}
             onChange={(e) => setGroupBio(e.target.value)}
             className={`${state?.errors?.groupBio ? "border-red-700" : ""}`}
