@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { Separator } from "@/components/ui/separator";
 import { fetchGroupsByUser } from "@/data/fetch-groups-by-user-id";
 import { unauthorized } from "next/navigation";
-import { GroupCard } from "./_components/group-card";
+import { GroupCard } from "../../components/group-card";
 
 export default async function Page() {
   const session = await auth();
