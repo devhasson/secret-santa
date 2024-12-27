@@ -3,11 +3,6 @@ import { GroupDetailsCardHeader } from "./_components/group-details-card-header"
 
 import { fetchGroupByIdWithParticipantsAndInvites } from "@/data/fetch-group-by-id-with-participants-and-invites";
 import { NotFoundGroup } from "./_components/not-found-group";
-import { addDays, formatDistance } from "date-fns";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { InvitesSection } from "./_components/invites-section";
 
 interface ParamsProps {
