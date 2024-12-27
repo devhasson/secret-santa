@@ -14,8 +14,13 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "./ui/input";
 
-export function DatePicker({ name }: { name: string }) {
-  const [date, setDate] = React.useState<Date>();
+interface DatePickerProps {
+  name: string;
+  defaultDate?: Date | null;
+}
+
+export function DatePicker({ name, defaultDate }: DatePickerProps) {
+  const [date, setDate] = React.useState<Date | null>(defaultDate || null);
 
   return (
     <Popover>
@@ -23,12 +28,14 @@ export function DatePicker({ name }: { name: string }) {
         <Button
           variant={"outline"}
           className={cn(
-            "justify-start text-left font-normal",
+            "justify-start text-left font-normal overflow-hidden",
             !date && "text-muted-foreground"
           )}
         >
           <CalendarIcon className="mr-1 h-4 w-4" />
-          {date ? format(date, "PPP") : "Pick a date"}
+          <span className="truncate">
+            {date ? format(date, "PPP") : "Pick a date"}
+          </span>
           <Input
             name={name}
             readOnly
@@ -41,8 +48,10 @@ export function DatePicker({ name }: { name: string }) {
       <PopoverContent className="w-auto p-0">
         <Calendar
           mode="single"
-          selected={date}
-          onSelect={setDate}
+          selected={date || undefined}
+          onSelect={(date) => {
+            setDate(date || null);
+          }}
           fromDate={new Date()}
           initialFocus
         />
