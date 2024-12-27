@@ -11,6 +11,9 @@ export async function fetchGroupsByUser(userId: string) {
         },
       },
     },
+    orderBy: {
+      date: "desc",
+    },
   });
 
   return groups;
