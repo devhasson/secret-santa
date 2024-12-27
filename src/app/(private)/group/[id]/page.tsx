@@ -28,10 +28,12 @@ export default async function Page({
     return <NotFoundGroup />;
   }
 
+  const isOwner = participant.role === "OWNER";
+
   return (
     <div className="flex flex-col mx-auto px-4 gap-8 max-w-screen-lg w-full">
       <div className="xs:grid xs:grid-cols-3 md:grid-cols-2 flex flex-col border rounded-lg shadow-lg p-8 gap-8">
-        <GroupDetailsCardHeader group={group} />
+        <GroupDetailsCardHeader group={group} isOwner={isOwner} />
         <InvitesSection group={group} />
       </div>
     </div>
