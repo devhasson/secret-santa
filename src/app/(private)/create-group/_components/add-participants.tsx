@@ -44,7 +44,7 @@ export function AddParticipants() {
       return toast.error("Participant is already added.");
     }
 
-    setParticipants((prev) => [...prev, { email }]);
+    setParticipants((prev) => [...prev, { email: email.toLowerCase().trim() }]);
     setNewEmail("");
   };
 
