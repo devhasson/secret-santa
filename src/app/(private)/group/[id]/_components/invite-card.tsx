@@ -25,23 +25,14 @@ export function InviteCard({ invite }: InviteCardProps) {
           <p className="truncate">{invite.invitedEmail}</p>
           <div className="flex items-center gap-1">
             <span className="text-xs text-muted-foreground">
-              {invite.status === "REJECTED" && "Rejected"}
-              {addDays(invite.createdAt, 7) < new Date()
-                ? "Expired"
-                : "Expires in " + formatDistance(expiresAt, new Date())}
+              {"Expires in " + formatDistance(expiresAt, new Date())}
             </span>
           </div>
         </div>
       </div>
       <div className="flex justify-end items-center col-span-2 ">
         <Badge className="h-fit overflow-hidden w-0 p-0 capitalize rounded-xl transition-all duration-200 group-hover:w-fit group-hover:px-2.5 group-hover:py-0.5">
-          {invite.status === "REJECTED"
-            ? "Rejected"
-            : addDays(invite.createdAt, 7) < new Date()
-              ? "Expired"
-              : invite.status === "ACCEPTED"
-                ? "Accepted"
-                : "Pending"}
+          {invite.status.toLowerCase()}
         </Badge>
       </div>
     </div>
