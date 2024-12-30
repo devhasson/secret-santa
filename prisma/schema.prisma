@@ -85,7 +85,8 @@ model Participant {
   group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   @@unique([userId, groupId])
-  @@index([userId, groupId])
+  @@index([userId])
+  @@index([groupId])
 }
 
 enum InviteStatus {
@@ -95,9 +96,10 @@ enum InviteStatus {
 }
 
 model Invite {
-  id           String       @id @default(cuid())
-  status       InviteStatus @default(PENDING)
-  invitedEmail String       @map("invited_email")
+  id           String          @id @default(cuid())
+  status       InviteStatus    @default(PENDING)
+  role         ParticipantRole @default(MEMBER)
+  invitedEmail String          @map("invited_email")
 
   createdAt DateTime @default(now())
 

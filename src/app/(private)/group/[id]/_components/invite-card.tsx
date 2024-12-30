@@ -39,7 +39,9 @@ export function InviteCard({ invite }: InviteCardProps) {
             ? "Rejected"
             : addDays(invite.createdAt, 7) < new Date()
               ? "Expired"
-              : "Pending"}
+              : invite.status === "ACCEPTED"
+                ? "Accepted"
+                : "Pending"}
         </Badge>
       </div>
     </div>

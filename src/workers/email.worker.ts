@@ -15,7 +15,7 @@ export const emailQueue = new Queue("email", {
 });
 
 export const emailWorker = new Worker(
-  "invite-user",
+  "email",
   async (job: Job) => {
     switch (job.name) {
       case "invite-user":
