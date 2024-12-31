@@ -43,13 +43,16 @@ export function ParticipantCard({
               ? participant.nickname
               : participant.user.email}
           </p>
-          <p className="text-xs text-muted-foreground">
+          <div className="text-xs text-muted-foreground flex flex-col sm:flex-row gap-0.5">
             <strong className="capitalize font-semibold">
               {participant.role.toLowerCase()}
             </strong>
-            {" - "} joined on{" "}
-            {formatDate(new Date(participant.createdAt), "MMMM dd, yyyy")}
-          </p>
+            <span className="hidden sm:block"> &middot; </span>
+            <span>
+              Since{" "}
+              {formatDate(new Date(participant.createdAt), "MMM dd, yyyy")}
+            </span>
+          </div>
         </div>
       </div>
       {isOwner && (
