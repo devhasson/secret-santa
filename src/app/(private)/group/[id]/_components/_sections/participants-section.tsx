@@ -1,5 +1,5 @@
 import { FetchGroupByIdWithParticipantsAndInvites } from "@/data/fetch-group-by-id-with-participants-and-invites";
-import { ParticipantCard } from "./participant-card";
+import { ParticipantCard } from "../participant-card";
 
 interface ParticipantsSectionProps {
   group: FetchGroupByIdWithParticipantsAndInvites;

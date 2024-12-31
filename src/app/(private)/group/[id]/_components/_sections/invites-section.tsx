@@ -1,5 +1,5 @@
 import { FetchGroupByIdWithParticipantsAndInvites } from "@/data/fetch-group-by-id-with-participants-and-invites";
-import { InviteCard } from "./invite-card";
+import { InviteCard } from "../invite-card";
 
 interface InvitesSectionProps {
   group: FetchGroupByIdWithParticipantsAndInvites;
@@ -9,7 +9,7 @@ export function InvitesSection({ group }: InvitesSectionProps) {
   const invitesFiltered = group.invites.filter(
     (invite) => invite.status === "PENDING"
   );
-  
+
   return (
     <div className="flex flex-col gap-4 xs:col-span-2 md:col-span-1">
       <h2 className="text-4xl font-bold">Invites</h2>
