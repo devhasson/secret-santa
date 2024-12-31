@@ -6,8 +6,8 @@ import { fetchGroupByIdWithParticipantsAndInvites } from "@/data/fetch-group-by-
 
 import { GroupDetailsCardHeader } from "./_components/group-details-card-header";
 import { NotFoundGroup } from "./_components/not-found-group";
-import { InvitesSection } from "./_components/invites-section";
-import { ParticipantsSection } from "./_components/participants-section";
+import { ParticipantsSection } from "./_components/_sections/participants-section";
+import { InvitesSection } from "./_components/_sections/invites-section";
 
 interface ParamsProps {
   id: string;
