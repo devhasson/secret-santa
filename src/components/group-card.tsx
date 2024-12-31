@@ -13,16 +13,25 @@ export function GroupCard({ group }: { group: Group }) {
         <h2 className="font-bold text-xl text-nowrap text-ellipsis">
           {group.name}
         </h2>
-        {group.date && (
+        {group.date ? (
           <div className="flex items-center gap-1">
             <Calendar size={12} className="text-red-500" />
             <span className="text-nowrap text-muted-foreground text-sm">
               {format(group.date, "PPP")}
             </span>
           </div>
+        ) : (
+          <div className="flex items-center gap-1">
+            <Calendar size={12} className="text-red-500" />
+            <span className="text-nowrap text-muted-foreground text-sm">
+              Not scheduled yet
+            </span>
+          </div>
         )}
       </div>
-      <p className="text-muted-foreground text-sm">{group.bio}</p>
+      <p className="text-muted-foreground text-sm">
+        {group.bio ? group.bio : "This group has no bio yet."}
+      </p>
       <ArrowRight
         size={24}
         className="self-end ease-in-out duration-150 group-hover:translate-x-3"
