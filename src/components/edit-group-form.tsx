@@ -6,10 +6,9 @@ import { Label } from "./ui/label";
 import { DatePicker } from "./date-picker";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { useActionState, useEffect } from "react";
+import { useActionState, useCallback, useEffect } from "react";
 import { editGroupData } from "@/app/(private)/group/[id]/_actions/edit-group-data";
 import { Loading } from "./loading";
-import { revalidatePath } from "next/cache";
 import { toast } from "sonner";
 
 interface EditGroupFormProps {
@@ -20,7 +19,10 @@ interface EditGroupFormProps {
 const initialState = { errors: {}, message: "" };
 
 export function EditGroupForm({ group, setOpenDialog }: EditGroupFormProps) {
-  const handleCloseDialog = () => setOpenDialog(false);
+  const handleCloseDialog = useCallback(
+    () => setOpenDialog(false),
+    [setOpenDialog]
+  );
 
   const [state, dispatch, pending] = useActionState(
     editGroupData,
@@ -36,7 +38,7 @@ export function EditGroupForm({ group, setOpenDialog }: EditGroupFormProps) {
     if (!state.success && state.message) {
       toast.error(state.message);
     }
-  }, [state]);
+  }, [state, handleCloseDialog]);
 
   return (
     <form action={dispatch} className="flex flex-col gap-4">
