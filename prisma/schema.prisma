@@ -63,7 +63,6 @@ model VerificationToken {
 }
 
 enum ParticipantRole {
-  ADMIN
   OWNER
   MEMBER
 }
@@ -71,6 +70,7 @@ enum ParticipantRole {
 model Participant {
   id        String          @id @default(cuid())
   createdAt DateTime        @default(now())
+  nickname  String?
   role      ParticipantRole @default(MEMBER)
 
   chosenId String?      @unique
