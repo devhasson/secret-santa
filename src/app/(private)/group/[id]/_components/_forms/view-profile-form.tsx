@@ -87,7 +87,11 @@ export function ViewProfileForm({
           ))}
       </div>
       <div className="flex items-center gap-3 justify-end flex-wrap">
-        <Button variant="secondary" onClick={() => onOpenChange(false)}>
+        <Button
+          variant="secondary"
+          type="button"
+          onClick={() => onOpenChange(false)}
+        >
           Fechar
         </Button>
         <Button disabled={pending} type="submit" className="min-w-32">
